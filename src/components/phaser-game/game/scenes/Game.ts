@@ -2,46 +2,40 @@ import { EventBus } from "../EventBus";
 import { Scene } from "phaser";
 
 export class Game extends Scene {
-  camera: Phaser.Cameras.Scene2D.Camera | null = null;
-  background: Phaser.GameObjects.Image | null = null;
-  gameText: Phaser.GameObjects.Text | null = null;
+  duck!: Phaser.GameObjects.Image;
+  scoreText!: Phaser.GameObjects.Text;
 
   constructor() {
     super("Game");
   }
 
   create() {
-    this.camera = this.cameras.main;
-    this.camera.setBackgroundColor(0x00ff00);
-    this.background = this.add.image(320, 569, "background");
-    this.background.setAlpha(0.5);
+    const { width, height } = this.scale;
+    this.duck = this.add
+      .image(0.2 * width, 0.5 * height, "duck")
+      .setOrigin(0.5, 0.5);
 
-    this.gameText = this.add
-      .text(
-        320,
-        569,
-        "Make something fun!\nand share it with us:\nsupport@phaser.io",
-        {
-          fontFamily: "Arial Black",
-          fontSize: 38,
-          color: "#ffffff",
-          stroke: "#000000",
-          strokeThickness: 8,
-          align: "center",
-        }
-      )
-      .setOrigin(0.5)
+    this.scoreText = this.add
+      .text(0.5 * width, 0.15 * height, "0", {
+        fontFamily: "sans-serif",
+        fontSize: 64,
+        color: "#ffffff",
+        stroke: "#000000",
+        strokeThickness: 4,
+        align: "center",
+      })
+      .setOrigin(0.5, 0.5)
       .setDepth(100);
-    
+
     this.input.on(
       "pointerdown",
       () => {
-        this.changeScene()
+        this.changeScene();
       },
       this
     );
 
-    EventBus.emit("current-scene-ready", this);
+    EventBus.emit("current-scene-start", this);
   }
 
   changeScene() {

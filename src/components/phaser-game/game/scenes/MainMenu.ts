@@ -1,75 +1,99 @@
-import { GameObjects, Scene } from "phaser";
 import { EventBus } from "../EventBus";
+import { Scene } from "phaser";
 
 export class MainMenu extends Scene {
-  background: GameObjects.Image | null = null;
-  logo: GameObjects.Image | null = null;
-  title: GameObjects.Text | null = null;
-  logoTween: Phaser.Tweens.Tween | null = null;
+  duck!: Phaser.GameObjects.Image;
+  title!: Phaser.GameObjects.Text;
+  helperText!: Phaser.GameObjects.Text;
+  duckTween!: Phaser.Tweens.Tween;
 
   constructor() {
     super("MainMenu");
   }
 
   create() {
-    this.background = this.add.image(320, 384, "background");
-    this.logo = this.add.image(320, 380, "logo").setDepth(100).setInteractive();
+    const { width, height } = this.scale;
+    this.duck = this.add
+      .image(0.5 * width, 0.5 * height + 15, "duck")
+      .setOrigin(0.5, 0.5);
+
     this.title = this.add
-      .text(320, 520, "Main Menu", {
-        fontFamily: "Arial Black",
-        fontSize: 38,
+      .text(0.5 * width, 0.3 * height, "Phaser Duck", {
+        fontFamily: "sans-serif",
+        fontSize: 64,
         color: "#ffffff",
         stroke: "#000000",
-        strokeThickness: 8,
+        strokeThickness: 4,
         align: "center",
       })
-      .setOrigin(0.5)
-      .setDepth(100)
-      .setInteractive();
+      .setOrigin(0.5, 0.5)
+      .setDepth(100);
 
-    EventBus.emit("current-scene-ready", this);
+    this.helperText = this.add
+      .text(0.5 * width, 0.7 * height, "Click to start", {
+        fontFamily: "sans-serif",
+        fontSize: 32,
+        color: "#ffffff",
+        stroke: "#000000",
+        strokeThickness: 3,
+        align: "center",
+      })
+      .setOrigin(0.5, 0.5)
+      .setDepth(100);
+
+    this.duckTween = this.tweens.add({
+      targets: this.duck,
+      y: { value: "-=30", duration: 500, ease: "Sine.easeInOut" },
+      angle: {
+        start: 0,
+        from: -30,
+        to: 30,
+        duration: 1000,
+        ease: "Sine.easeInOut",
+      },
+      yoyo: true,
+      repeat: -1,
+    });
 
     this.input.on(
-      "gameobjectdown",
-      (
-        _pointer: unknown,
-        gameObject: GameObjects.Image | GameObjects.Text | null
-      ) => {
-        console.log(gameObject === this.logo);
-        if (gameObject === this.logo) {
-          this.moveLogo();
-        }
-        if (gameObject === this.title) {
-          this.changeScene();
-        }
+      "pointerdown",
+      () => {
+        this.changeScene();
       },
       this
     );
+
+    EventBus.emit("current-scene-ready", this);
   }
 
   changeScene() {
-    if (this.logoTween) {
-      this.logoTween.stop();
-      this.logoTween = null;
-    }
+    const { width, height } = this.scale;
+    this.duckTween.remove();
 
-    this.scene.start("Game");
-  }
+    this.tweens.add({
+      targets: this.title,
+      alpha: 0,
+      duration: 200,
+      ease: "Sine.easeOut",
+    });
 
-  moveLogo() {
-    if (this.logoTween) {
-      if (this.logoTween.isPlaying()) {
-        this.logoTween.pause();
-      } else {
-        this.logoTween.play();
-      }
-    } else {
-      this.logoTween = this.tweens.add({
-        targets: this.logo,
-        y: { value: 80, duration: 1500, ease: "Sine.easeOut" },
-        yoyo: true,
-        repeat: -1,
-      });
-    }
+    this.tweens.add({
+      targets: this.helperText,
+      alpha: 0,
+      duration: 200,
+      ease: "Sine.easeOut",
+    });
+
+    this.tweens.add({
+      targets: this.duck,
+      x: 0.2 * width,
+      y: 0.5 * height,
+      angle: 0,
+      duration: 1000,
+      ease: "Sine.easeOut",
+      onComplete: () => {
+        this.scene.start("Game");
+      },
+    });
   }
 }
