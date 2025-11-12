@@ -1,5 +1,6 @@
 import { EventBus } from "../EventBus";
 import { Scene } from "phaser";
+import { Duck } from "../nodes/Duck";
 
 export class Game extends Scene {
   duck!: Phaser.GameObjects.Image;
@@ -11,9 +12,7 @@ export class Game extends Scene {
 
   create() {
     const { width, height } = this.scale;
-    this.duck = this.add
-      .image(0.2 * width, 0.5 * height, "duck")
-      .setOrigin(0.5, 0.5);
+    this.duck = new Duck(this, 0.2 * width, 0.5 * height);
 
     this.scoreText = this.add
       .text(0.5 * width, 0.15 * height, "0", {
@@ -26,14 +25,6 @@ export class Game extends Scene {
       })
       .setOrigin(0.5, 0.5)
       .setDepth(100);
-
-    this.input.on(
-      "pointerdown",
-      () => {
-        this.changeScene();
-      },
-      this
-    );
 
     EventBus.emit("current-scene-start", this);
   }
