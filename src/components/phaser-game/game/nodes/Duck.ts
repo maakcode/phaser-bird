@@ -31,6 +31,7 @@ export class Duck extends Phaser.Physics.Arcade.Sprite {
   }
 
   _jump() {
+    this.scene.sound.play(AssetKey.Sound.jump);
     this.setVelocityY(-500);
   }
 }

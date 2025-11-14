@@ -2,6 +2,7 @@ import { Scene } from "phaser";
 import { EventBus } from "../EventBus";
 import { Duck } from "../nodes/Duck";
 import { Pipe, ScoreArea } from "../nodes/Pipe";
+import { AssetKey } from "../types";
 
 export class Game extends Scene {
   score = 0;
@@ -17,6 +18,7 @@ export class Game extends Scene {
 
   create() {
     const { width, height } = this.scale;
+    this.score = 0;
     this.duck = new Duck(this, 0.2 * width, 0.5 * height);
 
     this.pipeColliderGroup = this.add.group();
@@ -95,6 +97,13 @@ export class Game extends Scene {
 
     this.score++;
     this.scoreText.setText(this.score.toString());
+
+    if (this.score % 10 === 0) {
+      this.sound.play(AssetKey.Sound.duckcry);
+    } else {
+      this.sound.play(AssetKey.Sound.scores);
+    }
+
     this.spawnEvent.timeScale = 1 + 0.02 * this.score;
     this.pipeColliderGroup.children.iterate((child) => {
       if (child instanceof Pipe) {
@@ -111,6 +120,7 @@ export class Game extends Scene {
   }
 
   changeScene() {
+    this.sound.play(AssetKey.Sound.crash);
     this.scene.start("GameOver");
   }
 }

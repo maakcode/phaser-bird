@@ -24,6 +24,10 @@ export class Preloader extends Scene {
     this.load.image(AssetKey.Image.duck, "duck_yellow.png");
     this.load.image(AssetKey.Image.headWood, "head_wood.png");
     this.load.image(AssetKey.Image.stickWood, "stick_wood.png");
+    this.load.audio(AssetKey.Sound.jump, "jump.wav");
+    this.load.audio(AssetKey.Sound.scores, "scores.wav");
+    this.load.audio(AssetKey.Sound.crash, "crash.wav");
+    this.load.audio(AssetKey.Sound.duckcry, "duckcry.wav");
   }
 
   create() {
