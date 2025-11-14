@@ -60,6 +60,12 @@ export class Game extends Scene {
     EventBus.emit("current-scene-start", this);
   }
 
+  update(time: number, delta: number): void {
+    if (this.duck.y < 0 || this.duck.y > this.scale.height) {
+      this.changeScene();
+    }
+  }
+
   private addPipeRow() {
     const { width, height } = this.scale;
 
