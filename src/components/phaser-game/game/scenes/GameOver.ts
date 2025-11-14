@@ -42,18 +42,48 @@ export class GameOver extends Scene {
       .setScale(0.5)
       .setDepth(100);
 
-    this.input.on(
-      "pointerdown",
-      () => {
-        this.changeScene();
+    this.tweens.addCounter({
+      from: 255,
+      to: 0,
+      duration: 600,
+      ease: "Sine.easeOut",
+      onUpdate: (tween) => {
+        const redValue = tween.getValue() ?? 0;
+        const color = Phaser.Display.Color.GetColor(redValue, 0, 0);
+        this.camera.setBackgroundColor(color);
       },
-      this
-    );
+      onComplete: () => {
+        this.input.on(
+          "pointerdown",
+          () => {
+            this.changeScene();
+          },
+          this
+        );
+      },
+    });
 
     EventBus.emit("current-scene-end", this);
   }
 
   changeScene() {
-    this.scene.start("MainMenu");
+    this.tweens.addCounter({
+      from: 0,
+      to: 100,
+      duration: 100,
+      ease: "Sine.easeIn",
+      onUpdate: (tween) => {
+        const progress = (tween.getValue() ?? 0) / 100;
+        const color = Phaser.Display.Color.GetColor(
+          0x02 * progress,
+          0x8a * progress,
+          0xf8 * progress
+        );
+        this.camera.setBackgroundColor(color);
+      },
+      onComplete: () => {
+        this.scene.start("MainMenu");
+      },
+    });
   }
 }
