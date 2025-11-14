@@ -10,4 +10,7 @@ export const AssetKey = {
     crash: "sound_crash",
     duckcry: "sound_duckcry",
   },
+  Font: {
+    monogram: "monogram sans-serif",
+  },
 } as const;

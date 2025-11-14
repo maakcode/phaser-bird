@@ -20,26 +20,28 @@ export class MainMenu extends Scene {
 
     this.title = this.add
       .text(0.5 * width, 0.3 * height, "Phaser Duck", {
-        fontFamily: "sans-serif",
-        fontSize: 64,
+        fontFamily: AssetKey.Font.monogram,
+        fontSize: 192,
         color: "#ffffff",
         stroke: "#000000",
-        strokeThickness: 4,
+        strokeThickness: 8,
         align: "center",
       })
       .setOrigin(0.5, 0.5)
+      .setScale(0.5)
       .setDepth(100);
 
     this.helperText = this.add
       .text(0.5 * width, 0.7 * height, "Click to start", {
-        fontFamily: "sans-serif",
-        fontSize: 32,
+        fontFamily: AssetKey.Font.monogram,
+        fontSize: 96,
         color: "#ffffff",
         stroke: "#000000",
-        strokeThickness: 3,
+        strokeThickness: 8,
         align: "center",
       })
       .setOrigin(0.5, 0.5)
+      .setScale(0.5)
       .setDepth(100);
 
     this.duckTween = this.tweens.add({

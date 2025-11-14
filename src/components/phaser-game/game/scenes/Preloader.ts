@@ -28,6 +28,7 @@ export class Preloader extends Scene {
     this.load.audio(AssetKey.Sound.scores, "scores.wav");
     this.load.audio(AssetKey.Sound.crash, "crash.wav");
     this.load.audio(AssetKey.Sound.duckcry, "duckcry.wav");
+    this.load.font(AssetKey.Font.monogram, "monogram.ttf");
   }
 
   create() {
