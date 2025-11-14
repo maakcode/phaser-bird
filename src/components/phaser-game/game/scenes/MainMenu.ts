@@ -1,5 +1,6 @@
 import { EventBus } from "../EventBus";
 import { Scene } from "phaser";
+import { AssetKey } from "../types";
 
 export class MainMenu extends Scene {
   duck!: Phaser.GameObjects.Image;
@@ -14,7 +15,7 @@ export class MainMenu extends Scene {
   create() {
     const { width, height } = this.scale;
     this.duck = this.add
-      .image(0.5 * width, 0.5 * height + 15, "duck")
+      .image(0.5 * width, 0.5 * height + 15, AssetKey.Image.duck)
       .setOrigin(0.5, 0.5);
 
     this.title = this.add

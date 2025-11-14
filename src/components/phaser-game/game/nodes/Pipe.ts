@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { AssetKey } from "../types";
 
 export class Pipe extends Phaser.GameObjects.Container {
   stick: Phaser.GameObjects.Sprite;
@@ -9,9 +10,11 @@ export class Pipe extends Phaser.GameObjects.Container {
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
-    this.head = scene.add.sprite(0, 0, "head_wood").setOrigin(0.5, 0);
+    this.head = scene.add
+      .sprite(0, 0, AssetKey.Image.headWood)
+      .setOrigin(0.5, 0);
     this.stick = scene.add
-      .sprite(0, this.head.displayHeight, "stick_wood")
+      .sprite(0, this.head.displayHeight, AssetKey.Image.stickWood)
       .setOrigin(0.5, 0);
     this.stick.scaleY = 3;
 

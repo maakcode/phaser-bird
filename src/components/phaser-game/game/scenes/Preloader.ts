@@ -1,4 +1,5 @@
 import { Scene } from "phaser";
+import { AssetKey } from "../types";
 
 export class Preloader extends Scene {
   constructor() {
@@ -20,9 +21,9 @@ export class Preloader extends Scene {
 
   preload() {
     this.load.setPath("assets");
-    this.load.image("duck", "duck_yellow.png");
-    this.load.image("head_wood", "head_wood.png");
-    this.load.image("stick_wood", "stick_wood.png");
+    this.load.image(AssetKey.Image.duck, "duck_yellow.png");
+    this.load.image(AssetKey.Image.headWood, "head_wood.png");
+    this.load.image(AssetKey.Image.stickWood, "stick_wood.png");
   }
 
   create() {
