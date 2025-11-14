@@ -6,7 +6,7 @@ export class Duck extends Phaser.Physics.Arcade.Sprite {
 
     if (this.body instanceof Phaser.Physics.Arcade.Body) {
       this.body.immovable = true;
-      this.body.setCircle(this.displayWidth / 2);
+      this.body.setCircle(0.49 * this.displayWidth);
     }
 
     scene.input.on(

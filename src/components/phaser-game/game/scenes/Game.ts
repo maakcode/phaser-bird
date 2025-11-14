@@ -69,7 +69,7 @@ export class Game extends Scene {
   private addPipeRow() {
     const { width, height } = this.scale;
 
-    const gap = 250;
+    const gap = 245;
     const x = width + 50;
     const y = Phaser.Math.Between(0.5 * gap + 20, height - 0.5 * gap - 20);
 
