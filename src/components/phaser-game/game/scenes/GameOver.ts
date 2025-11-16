@@ -3,12 +3,18 @@ import { Scene } from "phaser";
 import { AssetKey } from "../types";
 
 export class GameOver extends Scene {
+  score!: number;
   camera!: Phaser.Cameras.Scene2D.Camera;
   gameOverText!: Phaser.GameObjects.Text;
+  scoreText!: Phaser.GameObjects.Text;
   helperText!: Phaser.GameObjects.Text;
 
   constructor() {
     super("GameOver");
+  }
+
+  init(data: { score: number }) {
+    this.score = data.score;
   }
 
   create() {
@@ -18,6 +24,19 @@ export class GameOver extends Scene {
 
     this.gameOverText = this.add
       .text(0.5 * width, 0.3 * height, "Game Over", {
+        fontFamily: AssetKey.Font.monogram,
+        fontSize: 192,
+        color: "#ffffff",
+        stroke: "#000000",
+        strokeThickness: 8,
+        align: "center",
+      })
+      .setOrigin(0.5, 0.5)
+      .setScale(0.5)
+      .setDepth(100);
+
+    this.scoreText = this.add
+      .text(0.5 * width, 0.15 * height, `${this.score}`, {
         fontFamily: AssetKey.Font.monogram,
         fontSize: 192,
         color: "#ffffff",

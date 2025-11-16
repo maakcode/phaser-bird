@@ -122,6 +122,6 @@ export class Game extends Scene {
 
   changeScene() {
     this.sound.play(AssetKey.Sound.crash);
-    this.scene.start("GameOver");
+    this.scene.start("GameOver", { score: this.score });
   }
 }
