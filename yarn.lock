@@ -1006,6 +1006,127 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tauri-apps/cli-darwin-arm64@npm:2.9.4":
+  version: 2.9.4
+  resolution: "@tauri-apps/cli-darwin-arm64@npm:2.9.4"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@tauri-apps/cli-darwin-x64@npm:2.9.4":
+  version: 2.9.4
+  resolution: "@tauri-apps/cli-darwin-x64@npm:2.9.4"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@tauri-apps/cli-linux-arm-gnueabihf@npm:2.9.4":
+  version: 2.9.4
+  resolution: "@tauri-apps/cli-linux-arm-gnueabihf@npm:2.9.4"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@tauri-apps/cli-linux-arm64-gnu@npm:2.9.4":
+  version: 2.9.4
+  resolution: "@tauri-apps/cli-linux-arm64-gnu@npm:2.9.4"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@tauri-apps/cli-linux-arm64-musl@npm:2.9.4":
+  version: 2.9.4
+  resolution: "@tauri-apps/cli-linux-arm64-musl@npm:2.9.4"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@tauri-apps/cli-linux-riscv64-gnu@npm:2.9.4":
+  version: 2.9.4
+  resolution: "@tauri-apps/cli-linux-riscv64-gnu@npm:2.9.4"
+  conditions: os=linux & cpu=riscv64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@tauri-apps/cli-linux-x64-gnu@npm:2.9.4":
+  version: 2.9.4
+  resolution: "@tauri-apps/cli-linux-x64-gnu@npm:2.9.4"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@tauri-apps/cli-linux-x64-musl@npm:2.9.4":
+  version: 2.9.4
+  resolution: "@tauri-apps/cli-linux-x64-musl@npm:2.9.4"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@tauri-apps/cli-win32-arm64-msvc@npm:2.9.4":
+  version: 2.9.4
+  resolution: "@tauri-apps/cli-win32-arm64-msvc@npm:2.9.4"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@tauri-apps/cli-win32-ia32-msvc@npm:2.9.4":
+  version: 2.9.4
+  resolution: "@tauri-apps/cli-win32-ia32-msvc@npm:2.9.4"
+  conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
+"@tauri-apps/cli-win32-x64-msvc@npm:2.9.4":
+  version: 2.9.4
+  resolution: "@tauri-apps/cli-win32-x64-msvc@npm:2.9.4"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@tauri-apps/cli@npm:^2.9.4":
+  version: 2.9.4
+  resolution: "@tauri-apps/cli@npm:2.9.4"
+  dependencies:
+    "@tauri-apps/cli-darwin-arm64": "npm:2.9.4"
+    "@tauri-apps/cli-darwin-x64": "npm:2.9.4"
+    "@tauri-apps/cli-linux-arm-gnueabihf": "npm:2.9.4"
+    "@tauri-apps/cli-linux-arm64-gnu": "npm:2.9.4"
+    "@tauri-apps/cli-linux-arm64-musl": "npm:2.9.4"
+    "@tauri-apps/cli-linux-riscv64-gnu": "npm:2.9.4"
+    "@tauri-apps/cli-linux-x64-gnu": "npm:2.9.4"
+    "@tauri-apps/cli-linux-x64-musl": "npm:2.9.4"
+    "@tauri-apps/cli-win32-arm64-msvc": "npm:2.9.4"
+    "@tauri-apps/cli-win32-ia32-msvc": "npm:2.9.4"
+    "@tauri-apps/cli-win32-x64-msvc": "npm:2.9.4"
+  dependenciesMeta:
+    "@tauri-apps/cli-darwin-arm64":
+      optional: true
+    "@tauri-apps/cli-darwin-x64":
+      optional: true
+    "@tauri-apps/cli-linux-arm-gnueabihf":
+      optional: true
+    "@tauri-apps/cli-linux-arm64-gnu":
+      optional: true
+    "@tauri-apps/cli-linux-arm64-musl":
+      optional: true
+    "@tauri-apps/cli-linux-riscv64-gnu":
+      optional: true
+    "@tauri-apps/cli-linux-x64-gnu":
+      optional: true
+    "@tauri-apps/cli-linux-x64-musl":
+      optional: true
+    "@tauri-apps/cli-win32-arm64-msvc":
+      optional: true
+    "@tauri-apps/cli-win32-ia32-msvc":
+      optional: true
+    "@tauri-apps/cli-win32-x64-msvc":
+      optional: true
+  bin:
+    tauri: tauri.js
+  checksum: 10c0/242480c9aa73ec5950d5da93409f768ce6a789366d240c4e450febc69f02b557b90eafd9d8fdee5f3b7b7138fcf9d35e6d2b197646f1bc002ed01cf8085442c9
+  languageName: node
+  linkType: hard
+
 "@tybys/wasm-util@npm:^0.10.1":
   version: 0.10.1
   resolution: "@tybys/wasm-util@npm:0.10.1"
@@ -2917,6 +3038,7 @@ __metadata:
   dependencies:
     "@eslint/js": "npm:^9.39.1"
     "@tailwindcss/vite": "npm:^4.1.17"
+    "@tauri-apps/cli": "npm:^2.9.4"
     "@types/gh-pages": "npm:^6"
     "@types/node": "npm:^24.10.0"
     "@types/react": "npm:^19.2.2"
