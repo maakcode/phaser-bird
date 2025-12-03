@@ -74,7 +74,7 @@ export class Game extends Scene {
 
     const gap = 245;
     const x = width + 50;
-    const y = Phaser.Math.Between(0.5 * gap + 20, height - 0.5 * gap - 20);
+    const y = Phaser.Math.Between(0.5 * gap + 40, height - 0.5 * gap - 40);
 
     const bottomPipe = new Pipe(this, x, y + 0.5 * gap);
     const scoreArea = new ScoreArea(this, x, y, gap);
