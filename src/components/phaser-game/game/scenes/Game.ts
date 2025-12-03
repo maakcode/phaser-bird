@@ -31,7 +31,7 @@ export class Game extends Scene {
       loop: true,
     });
 
-    this.physics.add.collider(
+    this.physics.add.overlap(
       this.duck,
       this.pipeColliderGroup,
       this.changeScene,
@@ -39,7 +39,7 @@ export class Game extends Scene {
       this
     );
 
-    this.physics.add.collider(
+    this.physics.add.overlap(
       this.duck,
       this.scoreColliderGroup,
       this.addScore,
