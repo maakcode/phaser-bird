@@ -12,10 +12,13 @@ export class Pipe extends Phaser.GameObjects.Container {
 
     this.head = scene.add
       .sprite(0, 0, AssetKey.Image.headWood)
-      .setOrigin(0.5, 0);
+      .setOrigin(0.5, 0)
+      .setScale(2, 2);
     this.stick = scene.add
       .sprite(0, this.head.displayHeight, AssetKey.Image.stickWood)
-      .setOrigin(0.5, 0);
+      .setOrigin(0.5, 0)
+      .setScale(2, 2);
+
     this.stick.scaleY = 3;
 
     this.add([this.stick, this.head]);

@@ -10,7 +10,7 @@ import { Preloader } from "./scenes/Preloader";
 const config: Phaser.Types.Core.GameConfig = {
   type: AUTO,
   width: 600,
-  height: 600,
+  height: 800,
   physics: {
     default: "arcade",
     arcade: {
