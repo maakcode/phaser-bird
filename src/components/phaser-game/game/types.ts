@@ -3,6 +3,7 @@ export const AssetKey = {
     duck: "image_duck",
     headWood: "image_head_wood",
     stickWood: "image_stick_wood",
+    coin: "image_coin",
   },
   Sound: {
     jump: "sound_jump",

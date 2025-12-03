@@ -1,8 +1,9 @@
 import { Scene } from "phaser";
 import { EventBus } from "../EventBus";
 import { Duck } from "../nodes/Duck";
-import { Pipe, ScoreArea } from "../nodes/Pipe";
+import { Pipe } from "../nodes/Pipe";
 import { AssetKey } from "../types";
+import { Coin } from "../nodes/Coin";
 
 export class Game extends Scene {
   score = 0;
@@ -77,22 +78,22 @@ export class Game extends Scene {
     const y = Phaser.Math.Between(0.5 * gap + 40, height - 0.5 * gap - 40);
 
     const bottomPipe = new Pipe(this, x, y + 0.5 * gap);
-    const scoreArea = new ScoreArea(this, x, y, gap);
+    const coin = new Coin(this, x, y);
     const topPipe = new Pipe(this, x, y - 0.5 * gap, true);
 
     bottomPipe.setLevel(this.score);
-    scoreArea.setLevel(this.score);
+    coin.setLevel(this.score);
     topPipe.setLevel(this.score);
 
     this.pipeColliderGroup.add(bottomPipe);
-    this.scoreColliderGroup.add(scoreArea);
+    this.scoreColliderGroup.add(coin);
     this.pipeColliderGroup.add(topPipe);
   }
 
   private addScore(object1: unknown, object2: unknown) {
-    if (object1 instanceof ScoreArea) {
+    if (object1 instanceof Coin) {
       object1.destroy();
-    } else if (object2 instanceof ScoreArea) {
+    } else if (object2 instanceof Coin) {
       object2.destroy();
     }
 
@@ -113,7 +114,7 @@ export class Game extends Scene {
       return true;
     });
     this.scoreColliderGroup.children.iterate((child) => {
-      if (child instanceof ScoreArea) {
+      if (child instanceof Coin) {
         child.setLevel(this.score);
       }
       return true;

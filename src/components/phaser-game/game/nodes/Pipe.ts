@@ -55,39 +55,3 @@ export class Pipe extends Phaser.GameObjects.Container {
     super.destroy(fromScene);
   }
 }
-
-export class ScoreArea extends Phaser.GameObjects.Container {
-  area!: Phaser.GameObjects.Rectangle;
-
-  constructor(scene: Phaser.Scene, x: number, y: number, gap: number) {
-    super(scene, x, y);
-    scene.add.existing(this);
-    scene.physics.add.existing(this);
-
-    this.area = scene.add.rectangle(0, 0, 6, gap).setOrigin(0.5, 0.5);
-    this.add([this.area]);
-
-    if (this.body instanceof Phaser.Physics.Arcade.Body) {
-      this.body.allowGravity = false;
-      this.body.immovable = true;
-      this.body.setSize(this.area.displayWidth, this.area.displayHeight);
-      this.body.setOffset(-0.5 * this.body.width, -0.5 * this.body.height);
-    }
-  }
-
-  setLevel(level: number) {
-    if (this.body instanceof Phaser.Physics.Arcade.Body) {
-      this.body.setVelocityX(-200 - 5 * level);
-    }
-  }
-
-  preUpdate() {
-    if (this.x + this.width < this.scene.cameras.main.worldView.left) {
-      this.destroy();
-    }
-  }
-
-  destroy(fromScene?: boolean) {
-    super.destroy(fromScene);
-  }
-}
