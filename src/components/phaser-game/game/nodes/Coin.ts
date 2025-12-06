@@ -7,17 +7,7 @@ export class Coin extends Phaser.GameObjects.Sprite {
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
-    scene.anims.create({
-      key: "coin_flip",
-      frames: scene.anims.generateFrameNumbers(AssetKey.Image.coin, {
-        start: 0,
-        end: 6,
-      }),
-      frameRate: 16,
-      repeat: -1,
-    });
-
-    this.play("coin_flip");
+    this.play(AssetKey.Animation.coinFlip);
 
     if (this.body instanceof Phaser.Physics.Arcade.Body) {
       this.body.allowGravity = false;

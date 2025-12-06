@@ -14,4 +14,7 @@ export const AssetKey = {
   Font: {
     monogram: "monogram sans-serif",
   },
+  Animation: {
+    coinFlip: "coin_flip",
+  },
 } as const;

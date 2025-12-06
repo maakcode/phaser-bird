@@ -33,6 +33,16 @@ export class Preloader extends Scene {
     this.load.audio(AssetKey.Sound.crash, "crash.wav");
     this.load.audio(AssetKey.Sound.duckcry, "duckcry.wav");
     this.load.font(AssetKey.Font.monogram, "monogram.ttf");
+
+    this.anims.create({
+      key: AssetKey.Animation.coinFlip,
+      frames: this.anims.generateFrameNumbers(AssetKey.Image.coin, {
+        start: 0,
+        end: 6,
+      }),
+      frameRate: 16,
+      repeat: -1,
+    });
   }
 
   create() {
