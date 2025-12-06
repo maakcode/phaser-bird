@@ -28,6 +28,7 @@ export class Preloader extends Scene {
       frameWidth: 64,
       frameHeight: 64,
     });
+    this.load.image(AssetKey.Image.star, "star.png");
     this.load.audio(AssetKey.Sound.jump, "jump.wav");
     this.load.audio(AssetKey.Sound.scores, "scores.wav");
     this.load.audio(AssetKey.Sound.crash, "crash.wav");

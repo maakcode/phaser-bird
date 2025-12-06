@@ -12,6 +12,7 @@ export class Game extends Scene {
   pipeColliderGroup!: Phaser.GameObjects.Group;
   scoreColliderGroup!: Phaser.GameObjects.Group;
   spawnEvent!: Phaser.Time.TimerEvent;
+  starEmitter!: Phaser.GameObjects.Particles.ParticleEmitter;
 
   constructor() {
     super("Game");
@@ -33,6 +34,14 @@ export class Game extends Scene {
       }),
       frameRate: 16,
       repeat: -1,
+    });
+
+    this.starEmitter = this.add.particles(0, 0, AssetKey.Image.star, {
+      lifespan: 500,
+      speed: { min: 400, max: 650 },
+      angle: { min: -100, max: 100 },
+      alpha: { start: 1, end: 0 },
+      emitting: false,
     });
 
     this.spawnEvent = this.time.addEvent({
@@ -101,11 +110,22 @@ export class Game extends Scene {
   }
 
   private addScore(object1: unknown, object2: unknown) {
+    const position = {
+      x: this.duck.x,
+      y: this.duck.y,
+    };
+
     if (object1 instanceof Coin) {
       object1.destroy();
+      position.x = object1.x;
+      position.y = object1.y;
     } else if (object2 instanceof Coin) {
       object2.destroy();
+      position.x = object2.x;
+      position.y = object2.y;
     }
+
+    this.starEmitter.emitParticle(8, position.x, position.y);
 
     this.score++;
     this.scoreText.setText(this.score.toString());

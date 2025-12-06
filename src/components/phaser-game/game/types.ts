@@ -4,6 +4,7 @@ export const AssetKey = {
     headWood: "image_head_wood",
     stickWood: "image_stick_wood",
     coin: "image_coin",
+    star: "image_star",
   },
   Sound: {
     jump: "sound_jump",
