@@ -7,6 +7,7 @@ import { Coin } from "../nodes/Coin";
 
 export class Game extends Scene {
   score = 0;
+  spawnIndex = 0;
   duck!: Duck;
   scoreText!: Phaser.GameObjects.Text;
   pipeColliderGroup!: Phaser.GameObjects.Group;
@@ -21,6 +22,7 @@ export class Game extends Scene {
   create() {
     const { width, height } = this.scale;
     this.score = 0;
+    this.spawnIndex = 0;
     this.duck = new Duck(this, 0.2 * width, 0.5 * height);
 
     this.pipeColliderGroup = this.add.group();
@@ -91,8 +93,9 @@ export class Game extends Scene {
 
   private addPipeRow() {
     const { width, height } = this.scale;
+    this.spawnIndex++;
 
-    const gap = 245 - Math.min(this.score, 10) * 5;
+    const gap = 245 - Math.min(this.spawnIndex, 30) * 2;
     const x = width + 50;
     const y = Phaser.Math.Between(0.5 * gap + 40, height - 0.5 * gap - 40);
 
@@ -100,13 +103,26 @@ export class Game extends Scene {
     const coin = new Coin(this, x, y);
     const topPipe = new Pipe(this, x, y - 0.5 * gap, true);
 
-    bottomPipe.setLevel(this.score);
-    coin.setLevel(this.score);
-    topPipe.setLevel(this.score);
+    bottomPipe.setLevel(this.spawnIndex);
+    coin.setLevel(this.spawnIndex);
+    topPipe.setLevel(this.spawnIndex);
 
     this.pipeColliderGroup.add(bottomPipe);
     this.scoreColliderGroup.add(coin);
     this.pipeColliderGroup.add(topPipe);
+    this.spawnEvent.timeScale = 1 + 0.02 * this.spawnIndex;
+    this.pipeColliderGroup.children.iterate((child) => {
+      if (child instanceof Pipe) {
+        child.setLevel(this.spawnIndex);
+      }
+      return true;
+    });
+    this.scoreColliderGroup.children.iterate((child) => {
+      if (child instanceof Coin) {
+        child.setLevel(this.spawnIndex);
+      }
+      return true;
+    });
   }
 
   private addScore(object1: unknown, object2: unknown) {
@@ -135,20 +151,6 @@ export class Game extends Scene {
     } else {
       this.sound.play(AssetKey.Sound.scores);
     }
-
-    this.spawnEvent.timeScale = 1 + 0.02 * this.score;
-    this.pipeColliderGroup.children.iterate((child) => {
-      if (child instanceof Pipe) {
-        child.setLevel(this.score);
-      }
-      return true;
-    });
-    this.scoreColliderGroup.children.iterate((child) => {
-      if (child instanceof Coin) {
-        child.setLevel(this.score);
-      }
-      return true;
-    });
   }
 
   changeScene() {
