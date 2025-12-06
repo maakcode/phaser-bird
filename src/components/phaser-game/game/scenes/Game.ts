@@ -1,5 +1,5 @@
 import { Scene } from "phaser";
-import { EventBus } from "../EventBus";
+import { EventBus, EventKey } from "../EventBus";
 import { Duck } from "../nodes/Duck";
 import { Pipe } from "../nodes/Pipe";
 import { AssetKey } from "../types";
@@ -91,7 +91,7 @@ export class Game extends Scene {
       .setScale(0.5)
       .setDepth(100);
 
-    EventBus.emit("current-scene-start", this);
+    EventBus.emit(EventKey.GameStart);
   }
 
   update(time: number, delta: number): void {

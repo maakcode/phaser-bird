@@ -1,4 +1,4 @@
-import { EventBus } from "../EventBus";
+import { EventBus, EventKey } from "../EventBus";
 import { Scene } from "phaser";
 import { AssetKey } from "../types";
 
@@ -66,7 +66,7 @@ export class MainMenu extends Scene {
       this
     );
 
-    EventBus.emit("current-scene-ready", this);
+    EventBus.emit(EventKey.GameReady);
   }
 
   changeScene() {

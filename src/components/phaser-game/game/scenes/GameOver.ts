@@ -1,4 +1,4 @@
-import { EventBus } from "../EventBus";
+import { EventBus, EventKey } from "../EventBus";
 import { Scene } from "phaser";
 import { AssetKey } from "../types";
 
@@ -82,7 +82,7 @@ export class GameOver extends Scene {
       },
     });
 
-    EventBus.emit("current-scene-end", this);
+    EventBus.emit(EventKey.GameEnd, this.score);
   }
 
   changeScene() {
