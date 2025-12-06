@@ -2,8 +2,7 @@
 
 A Clone of Flappy Bird made in Phaser Engine.
 
-<img width="300" alt="phaser-bird" src="https://github.com/user-attachments/assets/e063cd7c-873f-4987-a9ea-53885b238250" />
-
+<img width="300" alt="phaser-bird" src="https://github.com/user-attachments/assets/b5a7d051-df5d-4af8-a2af-2d8f7570d8cb" />
 
 # How to play
 
