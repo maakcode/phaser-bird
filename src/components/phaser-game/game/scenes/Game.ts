@@ -12,7 +12,8 @@ export class Game extends Scene {
   scoreText!: Phaser.GameObjects.Text;
   pipeColliderGroup!: Phaser.GameObjects.Group;
   scoreColliderGroup!: Phaser.GameObjects.Group;
-  spawnEvent!: Phaser.Time.TimerEvent;
+  pipeSpawnEvent!: Phaser.Time.TimerEvent;
+  coinSpawnEvent!: Phaser.Time.TimerEvent;
   starEmitter!: Phaser.GameObjects.Particles.ParticleEmitter;
 
   constructor() {
@@ -46,9 +47,17 @@ export class Game extends Scene {
       emitting: false,
     });
 
-    this.spawnEvent = this.time.addEvent({
+    this.pipeSpawnEvent = this.time.addEvent({
       delay: 1800,
       callback: this.addPipeRow,
+      callbackScope: this,
+      loop: true,
+    });
+
+    this.coinSpawnEvent = this.time.addEvent({
+      startAt: 900,
+      delay: 1800,
+      callback: this.addCoin,
       callbackScope: this,
       loop: true,
     });
@@ -91,6 +100,17 @@ export class Game extends Scene {
     }
   }
 
+  private addCoin() {
+    const { width, height } = this.scale;
+    const x = width + 50;
+    const y = Phaser.Math.Between(100, height - 100);
+
+    const coin = new Coin(this, x, y);
+    coin.setLevel(this.spawnIndex);
+
+    this.scoreColliderGroup.add(coin);
+  }
+
   private addPipeRow() {
     const { width, height } = this.scale;
     this.spawnIndex++;
@@ -100,17 +120,15 @@ export class Game extends Scene {
     const y = Phaser.Math.Between(0.5 * gap + 40, height - 0.5 * gap - 40);
 
     const bottomPipe = new Pipe(this, x, y + 0.5 * gap);
-    const coin = new Coin(this, x, y);
     const topPipe = new Pipe(this, x, y - 0.5 * gap, true);
 
     bottomPipe.setLevel(this.spawnIndex);
-    coin.setLevel(this.spawnIndex);
     topPipe.setLevel(this.spawnIndex);
 
     this.pipeColliderGroup.add(bottomPipe);
-    this.scoreColliderGroup.add(coin);
     this.pipeColliderGroup.add(topPipe);
-    this.spawnEvent.timeScale = 1 + 0.02 * this.spawnIndex;
+    this.pipeSpawnEvent.timeScale = 1 + 0.02 * this.spawnIndex;
+    this.coinSpawnEvent.timeScale = 1 + 0.02 * this.spawnIndex;
     this.pipeColliderGroup.children.iterate((child) => {
       if (child instanceof Pipe) {
         child.setLevel(this.spawnIndex);
