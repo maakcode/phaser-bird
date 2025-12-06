@@ -103,7 +103,10 @@ export class Game extends Scene {
   private addCoin() {
     const { width, height } = this.scale;
     const x = width + 50;
-    const y = Phaser.Math.Between(100, height - 100);
+    const y =
+      this.spawnIndex === 0
+        ? height / 2
+        : Phaser.Math.Between(100, height - 100);
 
     const coin = new Coin(this, x, y);
     coin.setLevel(this.spawnIndex);
@@ -113,11 +116,13 @@ export class Game extends Scene {
 
   private addPipeRow() {
     const { width, height } = this.scale;
-    this.spawnIndex++;
 
     const gap = 245 - Math.min(this.spawnIndex, 30) * 2;
     const x = width + 50;
-    const y = Phaser.Math.Between(0.5 * gap + 40, height - 0.5 * gap - 40);
+    const y =
+      this.spawnIndex === 0
+        ? height / 2
+        : Phaser.Math.Between(0.5 * gap + 40, height - 0.5 * gap - 40);
 
     const bottomPipe = new Pipe(this, x, y + 0.5 * gap);
     const topPipe = new Pipe(this, x, y - 0.5 * gap, true);
@@ -141,6 +146,7 @@ export class Game extends Scene {
       }
       return true;
     });
+    this.spawnIndex++;
   }
 
   private addScore(object1: unknown, object2: unknown) {
