@@ -25,6 +25,16 @@ export class Game extends Scene {
     this.pipeColliderGroup = this.add.group();
     this.scoreColliderGroup = this.add.group();
 
+    this.anims.create({
+      key: AssetKey.Animation.coinFlip,
+      frames: this.anims.generateFrameNumbers(AssetKey.Image.coin, {
+        start: 0,
+        end: 6,
+      }),
+      frameRate: 16,
+      repeat: -1,
+    });
+
     this.spawnEvent = this.time.addEvent({
       delay: 1800,
       callback: this.addPipeRow,
