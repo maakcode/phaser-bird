@@ -1,3 +1,4 @@
+import * as Phaser from "phaser";
 import { EventBus, EventKey } from "../EventBus";
 import { Scene } from "phaser";
 import { AssetKey } from "../types";
@@ -63,7 +64,7 @@ export class MainMenu extends Scene {
       () => {
         this.changeScene();
       },
-      this
+      this,
     );
 
     EventBus.emit(EventKey.GameReady);

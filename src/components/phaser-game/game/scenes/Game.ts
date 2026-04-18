@@ -67,7 +67,7 @@ export class Game extends Scene {
       this.pipeColliderGroup,
       this.changeScene,
       undefined,
-      this
+      this,
     );
 
     this.physics.add.overlap(
@@ -75,7 +75,7 @@ export class Game extends Scene {
       this.scoreColliderGroup,
       this.addScore,
       undefined,
-      this
+      this,
     );
 
     this.scoreText = this.add
@@ -134,13 +134,13 @@ export class Game extends Scene {
     this.pipeColliderGroup.add(topPipe);
     this.pipeSpawnEvent.timeScale = 1 + 0.02 * this.spawnIndex;
     this.coinSpawnEvent.timeScale = 1 + 0.02 * this.spawnIndex;
-    this.pipeColliderGroup.children.iterate((child) => {
+    this.pipeColliderGroup.children.forEach((child) => {
       if (child instanceof Pipe) {
         child.setLevel(this.spawnIndex);
       }
       return true;
     });
-    this.scoreColliderGroup.children.iterate((child) => {
+    this.scoreColliderGroup.children.forEach((child) => {
       if (child instanceof Coin) {
         child.setLevel(this.spawnIndex);
       }

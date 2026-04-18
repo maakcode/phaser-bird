@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+import * as Phaser from "phaser";
 import { AssetKey } from "../types";
 
 export class Pipe extends Phaser.GameObjects.Container {
@@ -28,7 +28,7 @@ export class Pipe extends Phaser.GameObjects.Container {
       this.body.immovable = true;
       this.body.setSize(
         this.head.displayWidth,
-        this.head.displayHeight + this.stick.displayHeight
+        this.head.displayHeight + this.stick.displayHeight,
       );
       this.body.setOffset(-0.5 * this.body.width, 0);
 

@@ -1,3 +1,4 @@
+import * as Phaser from "phaser";
 import { AssetKey } from "../types";
 
 export class Duck extends Phaser.Physics.Arcade.Sprite {
@@ -16,7 +17,7 @@ export class Duck extends Phaser.Physics.Arcade.Sprite {
       () => {
         this._jump();
       },
-      this
+      this,
     );
   }
 
@@ -24,7 +25,7 @@ export class Duck extends Phaser.Physics.Arcade.Sprite {
     super.preUpdate(time, delta);
 
     const v = Math.asin(
-      Math.min(Math.max(-500, this.body?.velocity.y ?? 0), 500) / 700
+      Math.min(Math.max(-500, this.body?.velocity.y ?? 0), 500) / 700,
     );
 
     this.setAngle((v * 180) / Math.PI);
